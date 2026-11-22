@@ -3,4 +3,5 @@ __pycache__/
 *.csv
 !examples/*.csv
 .venv/
+.env
 .DS_Store

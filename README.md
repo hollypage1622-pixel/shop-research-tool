@@ -56,6 +56,30 @@ python -m shop_research --input my_shops.csv --output result.csv
 
 ランク：S = 60点〜 / A = 35点〜 / B = 15点〜 / C = それ以下
 
+## Discord botとして使う
+
+Discordで `!リサーチ 札幌市中央区 カフェ` と送ると、botがリサーチを実行して、要約メッセージとCSVファイルをそのチャンネルに返します。
+
+```
+!リサーチ <エリア> <業種> [件数]
+!ヘルプ
+```
+
+セットアップ:
+
+1. [Discord Developer Portal](https://discord.com/developers/applications) で Application を作成し、Bot を追加してトークンを取得
+2. Bot設定で **Message Content Intent** を有効化
+3. OAuth2 → URL Generator で scope `bot`、権限（メッセージ送信 / ファイル添付 / メッセージ履歴の閲覧）を選んで招待URLを発行し、自分のサーバーに招待
+4. このリポジトリで:
+
+```bash
+pip install -r requirements-bot.txt
+cp .env.example .env   # DISCORD_TOKEN にトークンを記入（.envはgit管理外）
+python bot.py
+```
+
+本体（CLI）は標準ライブラリのみのまま、Discord連携は `bot.py` と `shop_research/discord_logic.py`（コマンド解析・整形、テスト済み）に分離しています。
+
 ## テスト
 
 ```bash
